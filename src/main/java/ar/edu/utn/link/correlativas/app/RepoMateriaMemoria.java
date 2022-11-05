@@ -16,11 +16,18 @@ public class RepoMateriaMemoria implements RepoMateria{
         materias = new ArrayList<>();
     }
 
-
-
     @Override
     public void save(Materia m) {
         materias.add(m);
-        System.out.println(m);
+    }
+
+    @Override
+    public List<Materia> all(){
+        return this.materias;
+    }
+
+    @Override
+    public Materia porNombre(String nombre) {
+        return this.materias.stream().filter(materia -> materia.getNombre().equals(nombre)).findFirst().get();
     }
 }
