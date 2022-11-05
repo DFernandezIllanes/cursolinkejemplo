@@ -10,11 +10,13 @@ import java.util.List;
 @Repository
 public interface RepoMateria {
 
-    public void save(Materia m);
+    public void save(Materia m) throws MateriaRepetidaException;
 
     public List<Materia> all();
 
     public Page<Materia> page(Pageable pageable);
+
+    boolean existeMateriaDeNombre(String nombre);
 
     public Materia porNombre(String nombre);
 

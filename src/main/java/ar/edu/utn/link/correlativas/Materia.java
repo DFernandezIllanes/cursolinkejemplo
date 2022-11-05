@@ -1,15 +1,20 @@
 package ar.edu.utn.link.correlativas;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 
 public class Materia {
-	
+
+	@NotBlank
 	private String nombre;
 
+	@Min(1)
 	private Integer anio;
 	private Collection<Materia> correlativas;
 	
-	
+	public Materia(){}
+
 	public Materia(String nombre, Integer anio) {
 		super();
 		this.nombre = nombre;
