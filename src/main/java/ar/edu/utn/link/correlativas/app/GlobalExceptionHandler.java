@@ -15,4 +15,11 @@ public class GlobalExceptionHandler {
     String materiaRepetida(MateriaRepetidaException ex){
         return "La materia " + ex.getNombreMateria() + " ya existe";
     }
+
+    @ExceptionHandler(AlumnoRepetidoException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CONFLICT)
+    String alumnoRepetido(AlumnoRepetidoException ex){
+        return "El alumno " + ex.getNombreAlumno() + " ya existe";
+    }
 }

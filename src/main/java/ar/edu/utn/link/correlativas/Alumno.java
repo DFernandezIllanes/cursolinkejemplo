@@ -1,14 +1,18 @@
 package ar.edu.utn.link.correlativas;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.List;
 
 public class Alumno {
 	
 
+	@NotBlank
 	private String nombre;
 	private List<Curso> cursos;
 	private Collection<Materia>  materiasAprobadas;
+
+	public Alumno(){}
 	
 		
 	public Alumno(String nombre) {
