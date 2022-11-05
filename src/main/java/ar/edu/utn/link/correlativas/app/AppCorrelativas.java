@@ -25,7 +25,11 @@ public class AppCorrelativas {
     public CommandLineRunner ejemplo(RepoMateria repo){
         return (cosas) -> {
 
-            repo.save(new Materia("SO"));
+            repo.save(new Materia("SO", 2));
+            repo.save(new Materia("DDS", 3));
+            repo.save(new Materia("Algo", 1));
+            repo.save(new Materia("Analisis", 2));
+            repo.save(new Materia("Sintaxis", 3));
 
             System.out.println(unNumero);
             System.out.println(pepito);

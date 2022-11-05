@@ -5,14 +5,25 @@ import java.util.Collection;
 public class Materia {
 	
 	private String nombre;
+
+	private Integer anio;
 	private Collection<Materia> correlativas;
 	
 	
-	public Materia(String nombre) {
+	public Materia(String nombre, Integer anio) {
 		super();
 		this.nombre = nombre;
+		this.anio = anio;
 	}
-	
+
+	public Integer getAnio() {
+		return anio;
+	}
+
+	public void setAnio(Integer anio) {
+		this.anio = anio;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
