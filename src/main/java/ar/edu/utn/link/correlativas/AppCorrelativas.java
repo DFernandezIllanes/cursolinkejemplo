@@ -1,7 +1,6 @@
 package ar.edu.utn.link.correlativas;
 
-import ar.edu.utn.link.correlativas.app.RepoAlumno;
-import ar.edu.utn.link.correlativas.app.RepoMateria;
+import ar.edu.utn.link.correlativas.app.RepoAlumnoJPA;
 import ar.edu.utn.link.correlativas.app.RepoMateriaJPA;
 import ar.edu.utn.link.correlativas.model.Alumno;
 import ar.edu.utn.link.correlativas.model.Materia;
@@ -30,7 +29,7 @@ public class AppCorrelativas {
     }
 
     @Bean
-    public CommandLineRunner init(RepoMateriaJPA repo, RepoAlumno repoAlumno){
+    public CommandLineRunner init(RepoMateriaJPA repo, RepoAlumnoJPA repoAlumno){
 
         config.exposeIdsFor(Materia.class); //Le indicamos a Spring que muestre el id de la clase Materia
 
