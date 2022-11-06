@@ -1,10 +1,8 @@
 package ar.edu.utn.link.correlativas.app;
 
-import ar.edu.utn.link.correlativas.Alumno;
-import ar.edu.utn.link.correlativas.Materia;
+import ar.edu.utn.link.correlativas.model.Alumno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;

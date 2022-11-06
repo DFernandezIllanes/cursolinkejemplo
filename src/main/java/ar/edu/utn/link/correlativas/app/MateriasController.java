@@ -1,6 +1,6 @@
 package ar.edu.utn.link.correlativas.app;
 
-import ar.edu.utn.link.correlativas.Materia;
+import ar.edu.utn.link.correlativas.model.Materia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -9,32 +9,21 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController //Con esto sabe Spring que tiene que levantar MateriasController
-@RequestMapping("/materias")
+@RequestMapping("/materias_old")
 public class MateriasController {
 
     @Autowired
-    RepoMateria repo;
+    RepoMateriaJPA repo;
 
-    @GetMapping(path = {"/", ""})
-    public Page<Materia> materias(Pageable page,
-                                  @RequestParam(value = "anio", required = false) Integer anio) {
-        if(anio != null){
-            return new PageImpl<Materia>(repo.porAnio(anio));
-        } else {
-            return repo.page(page);
-        }
-    }
 
-    @GetMapping("/{pepe}")
+    /*@GetMapping("/{pepe}")
     public Materia materia(@PathVariable("pepe") String nombre){
-        return repo.porNombre(nombre);
-    }
+        return repo.findByNombre(nombre);
+    }*/
 
-    @PostMapping("/")
+    /*@PostMapping("/")
     public String alta(@RequestBody @Valid Materia materia,
                        BindingResult bindingResult) throws MateriaRepetidaException{ //El bindingResult indica como salio el proceso de enlace entre el body y materia
         if(bindingResult.hasErrors()){
@@ -43,5 +32,5 @@ public class MateriasController {
             repo.save(materia);
             return "ok";
         }
-    }
+    }*/
 }
