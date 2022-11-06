@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,14 +22,22 @@ public class Alumno {
 	@JsonIgnore
 	private List<Curso> cursos;
 
-	@Transient
+	@ManyToMany
 	private Collection<Materia>  materiasAprobadas;
 
-	public Alumno(){}
+	public Alumno(){
+		this.materiasAprobadas = new ArrayList<>();
+	}
 		
 	public Alumno(String nombre) {
-		super();
+		this();
 		this.nombre = nombre;
+	}
+
+	public Alumno(String nombre, String apellido) {
+		this();
+		this.nombre = nombre;
+		this.apellido = apellido;
 	}
 
 	public Long getId() {

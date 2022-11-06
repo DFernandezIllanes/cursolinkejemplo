@@ -37,13 +37,19 @@ public class AppCorrelativas {
 
             repo.save(new Materia("SO", 2));
             repo.save(new Materia("DDS", 3));
-            repo.save(new Materia("Algo", 1));
+
+            Materia algo = new Materia("Algo", 1);
+            repo.save(algo);
+
             repo.save(new Materia("Analisis", 2));
             repo.save(new Materia("Sintaxis", 3));
 
-            repoAlumno.save(new Alumno("pepe"));
-            repoAlumno.save(new Alumno("juan"));
-            repoAlumno.save(new Alumno("jorge"));
+            Alumno pepe = new Alumno("pepe", "Gomez");
+            pepe.getMateriasAprobadas().add(algo);
+
+            repoAlumno.save(pepe);
+            repoAlumno.save(new Alumno("juan", "Benitez"));
+            repoAlumno.save(new Alumno("jorge", "Sosa"));
         };
     }
 }
