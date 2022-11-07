@@ -3,6 +3,7 @@ package ar.edu.utn.link.correlativas.model;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -17,15 +18,29 @@ public class Materia {
 	@Min(1)
 	private Integer anio;
 
-	@Transient
+	private boolean activo;
+
+	@ManyToMany
 	private Collection<Materia> correlativas;
 	
-	public Materia(){}
+	public Materia(){
+		this.correlativas = new ArrayList<>();
+	}
 
 	public Materia(String nombre, Integer anio) {
 		super();
 		this.nombre = nombre;
 		this.anio = anio;
+		this.activo = true;
+		this.correlativas = new ArrayList<>();
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 
 	public Long getId() {
