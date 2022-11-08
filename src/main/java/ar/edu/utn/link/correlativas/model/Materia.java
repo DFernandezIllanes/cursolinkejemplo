@@ -1,5 +1,9 @@
 package ar.edu.utn.link.correlativas.model;
 
+import ar.edu.utn.link.correlativas.app.CorrelativasException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -66,10 +70,27 @@ public class Materia {
 		this.nombre = nombre;
 	}
 	public Collection<Materia> getCorrelativas() {
-		return correlativas;
+
+		return new ArrayList<Materia>(this.correlativas);
 	}
-	public void setCorrelativas(Collection<Materia> correlativas) {
+	protected void setCorrelativas(Collection<Materia> correlativas) {
 		this.correlativas = correlativas;
+	}
+
+	public void agregarCorrelativa(Materia corr) throws CorrelativasException {
+		if(this.equals(corr)){
+			throw new CorrelativasException("una materia no puede ser correlativa de ella misma", this, corr);
+		}
+
+		if(this.getCorrelativas().contains(corr)){
+			throw new CorrelativasException("ya es correlativa", this, corr);
+		}
+
+		if(!corr.isActivo() || !this.isActivo()){
+			throw new CorrelativasException("la materia no es válida", this, corr);
+		}
+
+		this.correlativas.add(corr);
 	}
 
 	@Override

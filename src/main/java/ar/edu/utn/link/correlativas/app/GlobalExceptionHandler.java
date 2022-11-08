@@ -22,4 +22,11 @@ public class GlobalExceptionHandler {
     String alumnoRepetido(AlumnoRepetidoException ex){
         return "El alumno " + ex.getNombreAlumno() + " ya existe";
     }
+
+    @ExceptionHandler(CorrelativasException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String correlativaMal(CorrelativasException ex){
+        return ex.getLocalizedMessage();
+    }
 }
