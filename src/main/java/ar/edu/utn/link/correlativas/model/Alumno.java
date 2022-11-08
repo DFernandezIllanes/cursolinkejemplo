@@ -1,5 +1,6 @@
 package ar.edu.utn.link.correlativas.model;
 
+import ar.edu.utn.link.correlativas.app.MateriaAprobadaException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -18,6 +19,8 @@ public class Alumno {
 
 	private String apellido;
 
+	private boolean activo;
+
 	@Transient
 	@JsonIgnore
 	private List<Curso> cursos;
@@ -27,17 +30,30 @@ public class Alumno {
 
 	public Alumno(){
 		this.materiasAprobadas = new ArrayList<>();
+		this.activo = true;
 	}
 		
 	public Alumno(String nombre) {
 		this();
 		this.nombre = nombre;
+		this.activo = true;
+		this.materiasAprobadas = new ArrayList<>();
 	}
 
 	public Alumno(String nombre, String apellido) {
 		this();
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.activo = true;
+		this.materiasAprobadas = new ArrayList<>();
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 
 	public Long getId() {
@@ -70,10 +86,23 @@ public class Alumno {
 		this.cursos = cursos;
 	}
 	public Collection<Materia> getMateriasAprobadas() {
-		return  materiasAprobadas;
+
+		return  new ArrayList<Materia>(this.materiasAprobadas);
 	}
-	public void setMateriasAprobadas(Collection<Materia> materiasAprobadas) {
+	protected void setMateriasAprobadas(Collection<Materia> materiasAprobadas) {
 		this.materiasAprobadas = materiasAprobadas;
+	}
+
+	public void agregarMateriaAprobada(Materia materiaAprobada) throws MateriaAprobadaException{
+		if(this.getMateriasAprobadas().contains(materiaAprobada)){
+			throw new MateriaAprobadaException("el alumno ya ha aprobado la materia", this, materiaAprobada);
+		}
+
+		if(!materiaAprobada.isActivo()){
+			throw new MateriaAprobadaException("la materia no es válida", this, materiaAprobada);
+		}
+
+		this.materiasAprobadas.add(materiaAprobada);
 	}
 
 	public void inscribir(Curso curso) {

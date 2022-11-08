@@ -29,4 +29,11 @@ public class GlobalExceptionHandler {
     String correlativaMal(CorrelativasException ex){
         return ex.getLocalizedMessage();
     }
+
+    @ExceptionHandler(MateriaAprobadaException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String materiaAprobadaMal(MateriaAprobadaException ex){
+        return ex.getLocalizedMessage();
+    }
 }
